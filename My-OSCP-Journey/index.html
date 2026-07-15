@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>My OSCP Journey | 0dayhunter</title><meta name="author" content="0dayhunter"><meta name="copyright" content="0dayhunter"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="My honest OSCP journey — how I prepared, my exam-day strategy, and the lessons that actually mattered">
+<meta property="og:type" content="article">
+<meta property="og:title" content="My OSCP Journey">
+<meta property="og:url" content="https://0dayhunter.github.io/My-OSCP-Journey/index.html">
+<meta property="og:site_name" content="0dayhunter">
+<meta property="og:description" content="My honest OSCP journey — how I prepared, my exam-day strategy, and the lessons that actually mattered">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://serioton.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9163bddd-7f46-4e82-a292-895fe15866d3%2F706ec838-be82-4b2b-8c99-8d6277ab92cd%2Fcat.png?table=block&id=07e71d74-f62d-4bd0-89ed-82ea3ead23d8&spaceId=9163bddd-7f46-4e82-a292-895fe15866d3&width=1420&userId=&cache=v2">
+<meta property="article:published_time" content="2026-07-15T18:40:00.000Z">
+<meta property="article:modified_time" content="2025-06-09T16:39:13.503Z">
+<meta property="article:author" content="0dayhunter">
+<meta property="article:tag" content="ctf,writeups,vulnlab,hackthebox,htb,thm,cheatsheet">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://serioton.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9163bddd-7f46-4e82-a292-895fe15866d3%2F706ec838-be82-4b2b-8c99-8d6277ab92cd%2Fcat.png?table=block&id=07e71d74-f62d-4bd0-89ed-82ea3ead23d8&spaceId=9163bddd-7f46-4e82-a292-895fe15866d3&width=1420&userId=&cache=v2"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "My OSCP Journey",
+  "url": "https://0dayhunter.github.io/My-OSCP-Journey/",
+  "image": "https://serioton.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9163bddd-7f46-4e82-a292-895fe15866d3%2F706ec838-be82-4b2b-8c99-8d6277ab92cd%2Fcat.png?table=block&id=07e71d74-f62d-4bd0-89ed-82ea3ead23d8&spaceId=9163bddd-7f46-4e82-a292-895fe15866d3&width=1420&userId=&cache=v2",
+  "datePublished": "2026-07-15T18:40:00.000Z",
+  "dateModified": "2025-06-09T16:39:13.503Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "0dayhunter",
+      "url": "https://0dayhunter.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon-0dh.png"><link rel="canonical" href="https://0dayhunter.github.io/My-OSCP-Journey/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"No results found for: ${query}","hits_stats":"${hits} articles found"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'My OSCP Journey',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><link rel="preload" as="font" type="font/woff2" href="/fonts/iosevka-nerd-regular.woff2" crossorigin><link rel="stylesheet" href="/css/iosevka-nerd.css"><link rel="preload" as="image" href="/img/bg-torii.jpg"><link rel="preload" as="image" href="/img/bg-torii.jpg"><style>#article-container.post-content{font-size:16px;}</style><meta name="generator" content="Hexo 6.3.0"></head><body><div class="bg-animation" id="web_bg" style="background-image: url(/img/bg-torii.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/covers/cover35.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/avatar.jpg" alt="Logo"><span class="site-name">0dayhunter</span></a><a class="nav-page-title" href="/"><span class="site-name">My OSCP Journey</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  Back to Home</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">My OSCP Journey</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">Created</span><time datetime="2026-07-15T18:40:00.000Z" title="Created 2026-07-15 18:40:00">2026-07-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/notes/">notes</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>After years of grinding Active Directory boxes on Vulnlab and Hack The Box, I finally decided to sit the exam everyone in this space eventually circles back to: the <strong>OSCP</strong>. This is the honest version of my journey — what I did, what I&#x27;d skip, and what actually moved the needle. No gatekeeping, no &quot;just try harder.&quot;</p>
+<h2 id="Why-OSCP"><a href="#Why-OSCP" class="headerlink" title="Why OSCP"></a>Why I went for it</h2>
+<p>I wasn&#x27;t chasing the cert for the letters. I wanted the thing OSCP forces on you: a repeatable methodology under pressure. It&#x27;s easy to feel competent when you have unlimited time and a Discord to ask in. The exam strips that away — a clock, a fresh network, and only your notes. That&#x27;s the skill I actually wanted to sharpen.</p>
+<h2 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>How I prepared</h2>
+<p>My prep broke down into three buckets, in order of how much they helped:</p>
+<ul>
+<li><strong>Proving Grounds Practice</strong> — the closest thing to exam-flavored boxes. I worked through the <em>TJnull</em> list and treated every box as if it were the real exam: no writeups until I&#x27;d genuinely exhausted my own ideas.</li>
+<li><strong>The PWK labs</strong> — underrated for one reason: pivoting. Rolling one foothold into a whole network taught me more about enumeration discipline than any single box.</li>
+<li><strong>Hack The Box &amp; Vulnlab</strong> — where my AD instincts came from. The exam&#x27;s AD set felt familiar precisely because I&#x27;d already burned myself on Kerberos delegation and ACL abuse a hundred times.</li>
+</ul>
+<blockquote>
+<p>The single biggest jump in my success rate came the day I stopped collecting tools and started writing my own methodology checklist. Tools are cheap. A process you trust at 3 a.m. is not.</p>
+</blockquote>
+<h2 id="Note-taking"><a href="#Note-taking" class="headerlink" title="Note-taking"></a>Note-taking is the real exam</h2>
+<p>I can&#x27;t overstate this: the report is graded, not your ego. I kept a running template for every box with these sections, and I filled them in <em>as I worked</em>, not afterward:</p>
+<pre><code># Target: 10.10.x.x
+## Recon
+- nmap -sC -sV -oN nmap/initial 10.10.x.x
+## Foothold
+- service &gt; vuln &gt; exploit &gt; proof
+## PrivEsc
+- enum &gt; vector &gt; escalation &gt; proof
+## Loot / creds
+</code></pre>
+<p>Every command, every screenshot, every credential — captured the moment it happened. When the adrenaline hits during the exam, you will not remember which host you pulled that hash from. Your notes will.</p>
+<h2 id="Exam-day"><a href="#Exam-day" class="headerlink" title="Exam day"></a>Exam day</h2>
+<p>The format is 24 hours of hands-on, then a second window to write the report. My personal rules for the day:</p>
+<ul>
+<li><strong>Enumerate wider before you go deeper.</strong> I front-loaded scanning across everything, then picked the target with the most obvious surface first for an early win and a confidence boost.</li>
+<li><strong>Take the break.</strong> I stepped away, ate a real meal, and slept a few hours. The box I was stuck on cracked in ten minutes when I came back with fresh eyes.</li>
+<li><strong>Screenshot the flag <em>and</em> the command that produced it.</strong> A proof with no context is a contested point.</li>
+<li><strong>Watch the clock, not the ego.</strong> If a path costs 90 minutes with nothing to show, park it and rotate. Come back later.</li>
+</ul>
+<h2 id="Lessons"><a href="#Lessons" class="headerlink" title="Lessons"></a>What I&#x27;d tell my past self</h2>
+<p>Three things I wish I&#x27;d internalized sooner:</p>
+<ul>
+<li><strong>Enumeration is 80% of the work.</strong> Almost every time I was stuck, it was because I&#x27;d missed something, not because I lacked an exploit.</li>
+<li><strong>Simple before clever.</strong> Default creds, password reuse, and misconfigurations beat exotic CVEs on the exam more often than you&#x27;d think.</li>
+<li><strong>Consistency &gt; intensity.</strong> A box a day for months did more than any weekend marathon.</li>
+</ul>
+<p>If you&#x27;re on this road right now: trust the reps. The exam isn&#x27;t looking for a genius — it&#x27;s looking for someone with a calm, repeatable process who documents everything. Build that, and the letters take care of themselves.</p>
+<p>More writeups and notes are on the rest of this blog. Questions? Find me on the links in the header. Good luck — you&#x27;ve got this. </p></article><div class="tag_share"></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/CrackMapExec-and-NetExec-Cheat-Sheet/" title="NetExec Cheatsheet"><img class="cover" src="/img/covers/cover27.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">Previous</div><div class="info-item-2">NetExec Cheatsheet</div></div><div class="info-2"><div class="info-item-1">A cheatsheet for NetExec, featuring useful commands and modules for different services</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">0dayhunter</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">25</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://x.com/0dayhunter_"><i class="fab fa-twitter"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/0dayhunter" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://x.com/0dayhunter_" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RBCD"><span class="toc-number">1.</span> <span class="toc-text">RBCD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Enumerate-MachineAccountQuota"><span class="toc-number">1.0.1.</span> <span class="toc-text">Enumerate MachineAccountQuota</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-machine-account"><span class="toc-number">1.0.2.</span> <span class="toc-text">Create a new machine account</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-the-msDS-AllowedToActOnBehalfOfOtherIdentity-attribute"><span class="toc-number">1.0.3.</span> <span class="toc-text">Read the msDS-AllowedToActOnBehalfOfOtherIdentity attribute</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Write-the-attribute"><span class="toc-number">1.0.4.</span> <span class="toc-text">Write the attribute</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Obtain-a-ticket"><span class="toc-number">1.0.5.</span> <span class="toc-text">Obtain a ticket</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-the-ticket"><span class="toc-number">1.0.6.</span> <span class="toc-text">Pass the ticket</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-NetExec"><span class="toc-number">1.1.</span> <span class="toc-text">Using NetExec</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SPN-less-RBCD"><span class="toc-number">2.</span> <span class="toc-text">SPN-less RBCD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Normal-RBCD"><span class="toc-number">2.0.1.</span> <span class="toc-text">Normal RBCD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Obtain-a-TGT-through-overpass-the-hash-to-use-RC4"><span class="toc-number">2.0.2.</span> <span class="toc-text">Obtain a TGT through overpass-the-hash to use RC4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Obtain-the-TGT-session-key"><span class="toc-number">2.0.3.</span> <span class="toc-text">Obtain the TGT session key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Change-the-controlledaccountwithoutSPN%E2%80%99s-NT-hash-with-the-TGT-session-key"><span class="toc-number">2.0.4.</span> <span class="toc-text">Change the controlledaccountwithoutSPN’s NT hash with the TGT session key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Obtain-the-delegated-service-ticket-through-S4U2self-U2U-followed-by-S4U2proxy"><span class="toc-number">2.0.5.</span> <span class="toc-text">Obtain the delegated service ticket through S4U2self+U2U, followed by S4U2proxy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pass-the-ticket-1"><span class="toc-number">2.0.6.</span> <span class="toc-text">Pass the ticket</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Resources"><span class="toc-number">3.</span> <span class="toc-text">Resources</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vulnlab-Machines-x2F-Chains"><span class="toc-number">4.</span> <span class="toc-text">Vulnlab Machines&#x2F;Chains</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Posts</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/AKTIVKATALOG-2-Hack-lu-CTF-2025/" title="AKTIVKATALOG 2"><img src="/img/covers/cover01.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AKTIVKATALOG 2"/></a><div class="content"><a class="title" href="/AKTIVKATALOG-2-Hack-lu-CTF-2025/" title="AKTIVKATALOG 2">AKTIVKATALOG 2</a><time datetime="2026-07-15T16:30:27.000Z" title="Created 2026-07-15 16:30:27">2026-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/AKTIVKATALOG-1-Hack-lu-CTF-2025/" title="AKTIVKATALOG 1"><img src="/img/covers/cover02.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="AKTIVKATALOG 1"/></a><div class="content"><a class="title" href="/AKTIVKATALOG-1-Hack-lu-CTF-2025/" title="AKTIVKATALOG 1">AKTIVKATALOG 1</a><time datetime="2026-07-15T14:01:50.000Z" title="Created 2026-07-15 14:01:50">2026-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Pwning-Reflection-Using-NTLM-Reflection/" title="Pwning Reflection Using NTLM Reflection"><img src="/img/covers/cover03.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Pwning Reflection Using NTLM Reflection"/></a><div class="content"><a class="title" href="/Pwning-Reflection-Using-NTLM-Reflection/" title="Pwning Reflection Using NTLM Reflection">Pwning Reflection Using NTLM Reflection</a><time datetime="2026-07-14T16:22:03.000Z" title="Created 2026-07-14 16:22:03">2026-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/Shibuya-Vulnlab/" title="Shibuya - Vulnlab"><img src="/img/covers/cover04.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Shibuya - Vulnlab"/></a><div class="content"><a class="title" href="/Shibuya-Vulnlab/" title="Shibuya - Vulnlab">Shibuya - Vulnlab</a><time datetime="2026-07-12T22:25:48.000Z" title="Created 2026-07-12 22:25:48">2026-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/HTB-Solving-Cicada-Using-Only-NetExec/" title="HTB: Solving Cicada Using Only NetExec"><img src="/img/covers/cover05.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="HTB: Solving Cicada Using Only NetExec"/></a><div class="content"><a class="title" href="/HTB-Solving-Cicada-Using-Only-NetExec/" title="HTB: Solving Cicada Using Only NetExec">HTB: Solving Cicada Using Only NetExec</a><time datetime="2026-07-11T13:54:52.000Z" title="Created 2026-07-11 13:54:52">2026-07-11</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(/img/bg-torii.jpg);"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2023 - 2026 By 0dayhunter</span><span class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 6.3.0</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.5</a></span></div><div class="footer_custom_text"></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle Between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><div class="js-pjax"></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">Search</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  Loading Database</span></div><div class="local-search-input"><input placeholder="Search for Posts" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
